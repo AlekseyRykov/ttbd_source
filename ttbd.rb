@@ -17,6 +17,10 @@ def show_category
   end
 end
 
+def delete_category cetegory_index
+  @tasks.delete_at(cetegory_index-1)
+end
+
 @tasks = []
 
 tdate
@@ -31,4 +35,22 @@ while true
   print 'Enter: '
 
   command = gets.strip.upcase.to_s
+
+  if command == '1'
+    print 'Enter category name: '
+    category_name = gets.strip
+    add_category category_name
+  elsif command == '2'
+    show_category
+  elsif command == '3'
+    puts 'Which category delete? Choose number: '
+    show_category
+    category_index = gets.strip.to_i
+    delete_category category_index
+  elsif command == "T"
+    tdate
+  else
+    puts 'Unknown command'
+  end
+
 end
