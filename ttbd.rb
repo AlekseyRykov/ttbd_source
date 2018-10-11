@@ -5,7 +5,9 @@ def tdate
   puts "\rToday is #{Date.today}"
 end
 
-def add_category category_name
+def add_category
+  print 'Enter category name: '
+  category_name = gets.strip
   @tasks << [category_name]
 end
 
@@ -44,9 +46,7 @@ while true
   command = gets.strip.upcase.to_s
 
   if command == '1'
-    print 'Enter category name: '
-    category_name = gets.strip
-    add_category category_name
+    add_category
   elsif command == '2'
     show_category
   elsif command == '3'
