@@ -5,7 +5,7 @@ def tdate
   puts "\rToday is #{Date.today}"
 end
 
-def add_category cetegory_name
+def add_category category_name
   @tasks << [category_name]
 end
 
@@ -17,8 +17,15 @@ def show_category
   end
 end
 
-def delete_category cetegory_index
-  @tasks.delete_at(cetegory_index-1)
+def delete_category
+  if @tasks.empty?
+    puts 'There is nothing to delete.'
+  else
+    puts 'Which category delete? Choose number: '
+    show_category
+    category_index = gets.strip.to_i
+    @tasks.delete_at(category_index-1)
+  end
 end
 
 @tasks = []
@@ -43,10 +50,7 @@ while true
   elsif command == '2'
     show_category
   elsif command == '3'
-    puts 'Which category delete? Choose number: '
-    show_category
-    category_index = gets.strip.to_i
-    delete_category category_index
+    delete_category
   elsif command == "T"
     tdate
   else
