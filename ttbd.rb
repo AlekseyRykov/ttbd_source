@@ -17,6 +17,7 @@ def add_category
   print 'Enter category name: '
   category_name = gets.strip
   @tasks << [category_name]
+  data_save
 end
 
 def show_category
@@ -35,6 +36,7 @@ def delete_category
     show_category
     category_index = gets.strip.to_i
     @tasks.delete_at(category_index-1)
+    data_save
   end
 end
 
@@ -50,6 +52,7 @@ def add_task
   print 'Time (00:00): '
   time = gets.strip
   @tasks[category_index] << { 'task' => new_task, 'date' => date, 'time' => time }
+  data_save
 end
 
 def show_task
@@ -80,13 +83,27 @@ def delete_task
   puts 'Choose task number:'
   task_number = gets.strip.to_i
   @tasks[category_index].delete_at(task_number)
+  data_save
+end
+
+def data_loading
+  if !File.file?('ttbd.txt')
+    @tasks = []
+    data_save
+  elsif File.file?('ttbd.txt')
+    @tasks = Marshal.load File.read('ttbd.txt')
+  end
+end
+
+def data_save
+  backup = Marshal.dump(@tasks)
+  File.open('ttbd.txt', 'w') { |t| t.write(backup) }
 end
 
 puts "\n\"THINGS TO BE DONE\"\n"
 loading
 tdate
-
-@tasks = []
+data_loading
 
 while true
 
