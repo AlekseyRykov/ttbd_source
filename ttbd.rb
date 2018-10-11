@@ -39,7 +39,7 @@ def delete_category
 end
 
 def add_task
-  puts 'In which category add task? Choose number: '
+  puts 'In which category add task? Choose number:'
   show_category
   print 'Enter: '
   category_index = gets.strip.to_i - 1
@@ -62,7 +62,7 @@ def show_task
         puts 'There is no tasks.'
       else
         task_number = 1
-        puts "#{name[0]}"
+        puts "#{index+1}. #{name[0]}"
         until task_number == array_length
           puts "#{task_number}. #{name[task_number]['task']} // #{name[task_number]['date']} // #{name[task_number]['time']}"
           task_number += 1
@@ -70,6 +70,16 @@ def show_task
       end
     end
   end
+end
+
+def delete_task
+  puts 'Choose category number:'
+  show_task
+  print 'Enter: '
+  category_index = gets.strip.to_i - 1
+  puts 'Choose task number:'
+  task_number = gets.strip.to_i
+  @tasks[category_index].delete_at(task_number)
 end
 
 puts "\n\"THINGS TO BE DONE\"\n"
@@ -99,6 +109,8 @@ while true
     add_task
   elsif command == 'S'
     show_task
+  elsif command == 'D'
+    delete_task
   elsif command == "T"
     tdate
   else
