@@ -1,6 +1,2 @@
 # TTBD
-Project: Things To Be Done
-
-## TODO
-* add second branch and connect sqlite
-* add third branch, connect active record + rails
+Source code of [Things To Be Done](https://github.com/AlekseyRykov/ttbd) project, which migrate to web and based on rails.
